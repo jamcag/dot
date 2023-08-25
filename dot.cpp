@@ -1,14 +1,16 @@
 // Write a function that takes the dot product of two vectors.
-// Both vectors are passed in as std::vectors of doubles.
+// The vector can be a std::array or std::vector.
 // You may assume they are the same size.
+#include <array>
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-double dot(vector<double> v1, vector<double> v2) {
+template<typename T, typename U>
+typename T::value_type dot(T v1, U v2) {
   const auto n = v1.size();
-  double result = 0.0;
+  typename T::value_type result = 0.0;
   for (int i = 0; i < n; ++i) {
     result += v1[i] * v2[i];
   }
@@ -16,5 +18,7 @@ double dot(vector<double> v1, vector<double> v2) {
 }
 
 int main() {
-  cout << dot({1.0, 2.0}, {2.0, 3.0}) << "\n";
+  vector<int> v{1, 2};
+  array<int, 2> w{3, 4};
+  cout << dot(v, w) << "\n";
 }
